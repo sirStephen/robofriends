@@ -1,0 +1,25 @@
+h1 {
+    font-family: 'Bungee Shade', cursive;
+    letter-spacing: 5px;
+}
+
+.header-title {
+    font-size: 50px;
+    color: hsl(158, 74%, 38%);
+}
+
+@media only screen and (max-width: 530px)  {
+    .header-title {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 355px)  {
+    h1 {
+        letter-spacing: 3px;
+    }
+
+    .header-title {
+        font-size: 25px;
+    }
+}

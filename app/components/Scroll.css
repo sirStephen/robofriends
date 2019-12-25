@@ -1,0 +1,6 @@
+.scroll {
+    overflow: scroll;
+    border-top: 1px solid hsl(158, 74%, 38%);
+    border-bottom: 1px solid hsl(158, 74%, 38%);
+    height: 500px;
+}
