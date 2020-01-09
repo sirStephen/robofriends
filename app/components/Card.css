@@ -1,3 +1,16 @@
 .robot-name {
     font-weight: bold;
 }
+
+.flex {
+    display: flex;
+    padding-right: 5px;
+}
+
+.pr {
+    padding-right: 5px;
+}
+
+.card-width {
+    width: 300px;
+}
