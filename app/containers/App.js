@@ -10,14 +10,20 @@ class App extends React.Component {
         super()
         this.state = {
             robots: [],
-            searchField: ''
+            searchField: '',
+            planets: [],
         }
     }
 
     componentDidMount() {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(users => {this.setState({ robots: users })})
+        Promise.all([fetch('https://jsonplaceholder.typicode.com/users'), fetch('https://swapi.co/api/planets/')]).then(([response1, response2]) => {
+            return Promise.all([response1.json(), response2.json()])
+        }).then(([users, planets]) => {
+            this.setState({
+                robots: users,
+                planets: planets.results
+            })
+        })
     }
 
     onSearchChange = (event) => {
@@ -25,12 +31,16 @@ class App extends React.Component {
     }
     
     render() {
-        const { robots, searchField } = this.state;
+        const { robots, searchField, planets } = this.state;
 
         const filteredRobots = robots.filter((robot) => {
             return robot.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase());
         })
 
+        const filteredPlanets = planets.map(planet => {
+            return planet
+        });
+        
         if (!robots.length) {
             return <h1 className='header-title tc'>Loading...</h1>
         } else {
@@ -40,7 +50,10 @@ class App extends React.Component {
                     <SearchBox searchChange={this.onSearchChange}/>
                     <Scroll>
                         <ErrorBoundary>
-                            <CardList robots={filteredRobots}/>
+                            <CardList 
+                                robots={filteredRobots}
+                                planets={filteredPlanets}
+                            />
                         </ErrorBoundary>
                     </Scroll>
                 </div>
